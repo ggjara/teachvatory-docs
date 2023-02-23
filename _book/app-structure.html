@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 2 App Structure | Teachvatory</title>
+<meta name="author" content="Gonzalo Jara">
+<meta name="description" content="2.1 Read the required documentation Before learning how the app is structured you need to have a basic comprehension of Shiny and the Golem framework. Please read the following: Mastering Shiny: A...">
+<meta name="generator" content="bookdown 0.32 with bs4_book()">
+<meta property="og:title" content="Chapter 2 App Structure | Teachvatory">
+<meta property="og:type" content="book">
+<meta property="og:description" content="2.1 Read the required documentation Before learning how the app is structured you need to have a basic comprehension of Shiny and the Golem framework. Please read the following: Mastering Shiny: A...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 2 App Structure | Teachvatory">
+<meta name="twitter:description" content="2.1 Read the required documentation Before learning how the app is structured you need to have a basic comprehension of Shiny and the Golem framework. Please read the following: Mastering Shiny: A...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.4.2/transition.js"></script><script src="libs/bs3compat-0.4.2/tabs.js"></script><script src="libs/bs3compat-0.4.2/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Teachvatory</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Welcome</a></li>
+<li><a class="" href="installation.html"><span class="header-section-number">1</span> Installation</a></li>
+<li><a class="active" href="app-structure.html"><span class="header-section-number">2</span> App Structure</a></li>
+<li><a class="" href="edit-app.html"><span class="header-section-number">3</span> Edit the app</a></li>
+<li><a class="" href="deploy-app.html"><span class="header-section-number">4</span> Deploy App</a></li>
+<li><a class="" href="recommendations.html"><span class="header-section-number">5</span> Recommendations</a></li>
+</ul>
+
+        <div class="book-extra">
+          <p><a id="book-repo" href="https://github.com/rstudio/bookdown-demo">View book source <i class="fab fa-github"></i></a></p>
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="app-structure" class="section level1" number="2">
+<h1>
+<span class="header-section-number">2</span> App Structure<a class="anchor" aria-label="anchor" href="#app-structure"><i class="fas fa-link"></i></a>
+</h1>
+<div id="read-the-required-documentation" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> Read the required documentation<a class="anchor" aria-label="anchor" href="#read-the-required-documentation"><i class="fas fa-link"></i></a>
+</h2>
+<p>Before learning how the app is structured you need to have a basic comprehension of <a href="https://mastering-shiny.org">Shiny</a> and the <a href="https://engineering-shiny.org/golem.html">Golem</a> framework. Please read the following:</p>
+<ul>
+<li>
+<a href="https://mastering-shiny.org/index.html">Mastering Shiny</a>: A comprehensive book on Shiny. It contains almost all the information you need to interact with the <em>Shiny</em> part of Teachvatory. I recommend starting with Chapters 1 to 4 if you have not had any experience with Shiny before. If you already know some Shiny, feel free to skip those chapters.
+<ul>
+<li>Chapters 1 to 8 <strong>(Required)</strong>
+</li>
+<li>Chapter 10 <strong>(Required)</strong>
+</li>
+<li>Chapters 12 <strong>(Required)</strong>
+</li>
+<li>Chapter 13 and 14 <strong>(Recommended)</strong>
+</li>
+<li>Chapters 19 and 20 <strong>(Required).</strong>
+</li>
+</ul>
+</li>
+<li>
+<a href="https://engineering-shiny.org">Engineering Production-Grade Shiny Apps</a>: This is <strong>the</strong> book to understand our app’s structure. <strong>Teachvatory is built using the Golem Framework</strong>, which is explained in detail in this book. Do not continue reading the documentation before learning about Golem - it would make your learning process much harder. To understand Teachvatory you won’t need to read all the chapters - with the following list you will be ok:
+<ul>
+<li>Chapters 3 and 4: Introduce Golem. <strong>(Required)</strong>
+</li>
+<li>Chapter 8: Explains how to create a Golem app from scratch. Although we will not be creating a new application, I think it is important that you understand what each configuration file does. <strong>(Required)</strong>
+</li>
+<li>Chapter 10: Explains how to develop your app using Golem’s functions. <strong>(Required)</strong>
+</li>
+</ul>
+</li>
+</ul>
+<p>Once you have read the required chapters we are ready to go into our app’s structure.</p>
+</div>
+<div id="teachvatory-code-structure" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> Teachvatory code structure<a class="anchor" aria-label="anchor" href="#teachvatory-code-structure"><i class="fas fa-link"></i></a>
+</h2>
+<p>Teachvatory follows the Golem Framework. This means that all the files are organized and named following the Golem conventions (which, at the same time, follows the .R package conventions). (If you have not read <a href="https://engineering-shiny.org/golem.html">Chapter 4 of Engineering Production-Grade Shiny apps</a> yet, this is a good time to do it).</p>
+<pre class="shell"><code>├── DESCRIPTION
+├── LICENSE
+├── LICENSE.md
+├── NAMESPACE
+├── R
+│   ├── _disable_autoload.R
+│   ├── app_config.R
+│   ├── app_server.R
+│   ├── app_ui.R
+│   ├── fct_driveaccess.R
+│   ├── fct_polishedauth.R
+│   ├── globalvars.R
+│   ├── mod_conventions.R
+│   ├── mod_metrics.R
+│   ├── mod_metrics_fct_logic.R
+│   ├── mod_quiz.R
+│   ├── mod_quiz_questionviz.R
+│   ├── mod_quiz_questionviz_fct_graphs.R
+│   ├── mod_quiz_questionviz_fct_uidynamic.R
+│   ├── mod_quiz_fct_logic.R
+│   ├── mod_roster.R
+│   └── run_app.R
+├── README.Rmd
+├── README.md
+├── app.R
+├── config.yml
+├── dev
+│   ├── 01_start.R
+│   ├── 02_dev.R
+│   ├── 03_deploy.R
+│   ├── googledrive_auth.R
+│   └── run_dev.R
+├── inst
+│   ├── app
+│   │   └── www
+│   │       ├── favicon.ico
+│   │       └── img
+│   │           ├── logo_dark_background.png
+│   │           ├── logo_white_background.png
+│   │           ├── logosymbol_dark_background.png
+│   │           └── logosymbol_white_background.png
+│   └── golem-config.yml
+├── man
+│   ├── chart_multiplechoise_multiple.Rd
+│   ├── (...)
+├── rsconnect
+│   └── shinyapps.io
+│       └── gonzalojara
+│           └── teachvatory.dcf
+├── teachvatory.Rproj
+└── tests
+    ├── testthat
+    │   ├── test-mod_quiz_questionviz.R
+    │   └── (...)
+    └── testthat.R</code></pre>
+<div id="section" class="section level3" number="2.2.1">
+<h3>
+<span class="header-section-number">2.2.1</span> <code>./</code><a class="anchor" aria-label="anchor" href="#section"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li><p><code>DESCRIPTION</code> contains the package information such as title, description, author, and app version. No need to change it.</p></li>
+<li><p><code>LICENSE</code> and the <code>LICENSE.md</code> files define the app licences. No need to change them.</p></li>
+<li><p><code>NAMESPACE</code> is an autogenerated file that contains the packages dependecies. <strong>You should never edit it by hand</strong>. The file is automatically updated when a new package is added with <code>usethis::use_package("package-name")</code> and referenced in the app using <code>import</code> or <code>package-name::func()</code>.</p></li>
+<li><p><code>README.md</code>and <code>README.rmd</code> are used to create a landing page at the GitHub page.</p></li>
+<li>
+<p><code>./config.yml</code> contains the private variables that are needed in the app. It also allows to use <code>.R</code> when preceding the expresion with <code>!expr</code>. In this example, the app is calling for the private variables <code>POLISED_APP_NAME</code> and <code>POLISHED_API_KEY</code> that are defined in our <code>.Renviron</code> file.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yml"><code class="sourceCode yaml"><span id="cb5-1"><a href="app-structure.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">default</span><span class="kw">:</span></span>
+<span id="cb5-2"><a href="app-structure.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">polished_app_name</span><span class="kw">:</span><span class="at"> !expr Sys.getenv("POLISHED_APP_NAME")</span></span>
+<span id="cb5-3"><a href="app-structure.html#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">polished_api_key</span><span class="kw">:</span><span class="at"> !expr Sys.getenv("POLISHED_API_KEY")</span></span></code></pre></div>
+</li>
+</ul>
+</div>
+<div id="r" class="section level3" number="2.2.2">
+<h3>
+<span class="header-section-number">2.2.2</span> <code>.R/</code><a class="anchor" aria-label="anchor" href="#r"><i class="fas fa-link"></i></a>
+</h3>
+<p>All the <code>.R</code> files that defines the application logic are located in the <code>R/</code> folder. Inside these files you will find the content of your modules (created with <code>golem::add_modules()</code>), and the utilitarian and business functions (created with <code><a href="https://rdrr.io/pkg/golem/man/file_creation.html">golem::add_utils()</a></code>and <code><a href="https://rdrr.io/pkg/golem/man/file_creation.html">golem::add_fct()</a></code>).</p>
+<ul>
+<li>
+<code>_disable_autoload.R</code> is an autogerated file to disable the autoload of shinyapps.io. No need to change it.</li>
+<li>
+<code>app_config.R</code> contains the mechanics for golem. You do not need to modify this file.</li>
+<li>
+<code>app_server.R</code> is the main server configuration. In this file the app handles the user interaction with the navigation bars, load the MasterQuiz metadata, and the Roster file. It is also where the app call to the modules’ server function.</li>
+<li>
+<code>app_ui.R</code> is the main UI configuration. In this file you can change the dashboard left, right, top, and bottom navigation bar. It also calls the modules’ UIs.</li>
+<li>
+<code>fct_driveraccess.R</code> and <code>fct_polishedauth</code> contains functions to interact with Google Drive Files and the Polished authentication systems, respectively. (Note that because these are business-specific functions, the <code>.R</code> files start with <code>fct_</code>).</li>
+<li>
+<code>global_vars.R</code> defines variables that are used in the app like the Dashboard URL, or the name used in the quizes to identify a student. You should never put private variables, like the API keys, here.</li>
+<li>
+<code>mod_conventions.R</code>, <code>mod_metrics.R</code>, <code>mod_quiz.R</code>, and <code>mod_roster.R</code> are the main modules of the app. These modules contains the UI and server functions for each of the sections that you see in the left navigation bar.</li>
+<li>
+<code>mod_metrics_fct_logic.R</code> and <code>mod_quiz_fct_logic.R</code> are two business-specific functions used in <code>mod_metrics.R</code> and <code>mod_quiz.R</code>, respectively.</li>
+<li>
+<code>mod_quiz_questinviz.R</code> is a module that is called <strong>inside</strong> the <code>mod_quiz.R</code> module. You can think of this as a second-level module. This module takes care of the questions’ visualizations.</li>
+<li>
+<code>mod_quiz_questionviz_fct_graphs.R</code> and <code>mod_quiz_questionviz_fct_uidynamic.R</code> are two business-specific files with functions that are used to create the graphs and UI for the <code>mod_quiz_questionviz.R</code> module. We could have put all the functions into one <code>_fct</code> file, or all of them inside <code>mod_quiz_questionviz.R</code>, and the functionality would have remained the same. Instead, we decide to break the code into different files so it would be easier to change and add functionalities.</li>
+<li>
+<code>run_app.R</code> contains the <code>run_app()</code> function that is called when a new user connects to the app. You should not change this file unless you want to edit the authentication system or edit the login page.</li>
+</ul>
+</div>
+<div id="dev" class="section level3" number="2.2.3">
+<h3>
+<span class="header-section-number">2.2.3</span> <code>dev/</code><a class="anchor" aria-label="anchor" href="#dev"><i class="fas fa-link"></i></a>
+</h3>
+<p>The files in this folder are never called by the app. Instead, these files are meant to keep code that you will find yourself needing often when developing the app locally. You are not required to run any of these files; they serve only as a place to keep code and not forget them.</p>
+<ul>
+<li>
+<code>01_start.R</code> contains configuration code that you need to run when you first create a Golem app.</li>
+<li>
+<code>02_dev.R</code> contains code that you will need to run when developing the app, like the function to create new modules, or <code>_fct</code> and <code>_utils</code>.</li>
+<li>
+<code>03_deploy.R</code> contains code that you will need to run when deploying the app.</li>
+<li>
+<code>googledrive_auth.R</code> is a configuration file that you will need to run whenever you want to change the <code>.secrets</code> of the app needed to connect to the Google Files API.</li>
+<li>
+<code>run_dev.R</code> contains the block of code that you need to run to start the app locally.</li>
+</ul>
+</div>
+<div id="inst" class="section level3" number="2.2.4">
+<h3>
+<span class="header-section-number">2.2.4</span> <code>inst/</code><a class="anchor" aria-label="anchor" href="#inst"><i class="fas fa-link"></i></a>
+</h3>
+<p>In this folder you will find the <code>golem_config.yml</code> file and the public resources.</p>
+<ul>
+<li>
+<code>app/www/</code> is where you put resourcer that will need to be accesed on the web, like pictures.</li>
+<li>
+<code>golem_config.yml</code> is a file to define variables for golem. We do not use this file for keeping variables as we use <code>./config.yml</code> in the root folder instead.</li>
+</ul>
+</div>
+<div id="man" class="section level3" number="2.2.5">
+<h3>
+<span class="header-section-number">2.2.5</span> <code>man/</code><a class="anchor" aria-label="anchor" href="#man"><i class="fas fa-link"></i></a>
+</h3>
+<p>These files are automatically generated when building the app. These files contain the functions descriptions created using the <code>roxygen2</code> convention.</p>
+<p><strong>Example</strong>:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#' Get sheetnames of file in course directory</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' @description Filter a `directory` (dribble) by `filter` and returns</span></span>
+<span><span class="co">#' the sheetnames of the file.</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' @param directory A dribble of files in a directory</span></span>
+<span><span class="co">#' @param filter A string of the file to open</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' @return A list of sheetnames or `c("")` if fail.</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' @import dplyr stringr googlesheets4 googledrive</span></span>
+<span><span class="va">get_sheetnames</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">directory</span>, <span class="va">filter</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/conditions.html">tryCatch</a></span><span class="op">(</span></span>
+<span>    <span class="op">{</span></span>
+<span>      <span class="va">filter_path</span> <span class="op">&lt;-</span> <span class="va">directory</span> <span class="op">%&gt;%</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">name</span> <span class="op">==</span> <span class="va">filter</span><span class="op">)</span></span>
+<span>      <span class="va">metadata</span> <span class="op">&lt;-</span> <span class="fu">googlesheets4</span><span class="fu">::</span><span class="fu"><a href="https://googlesheets4.tidyverse.org/reference/gs4_get.html">gs4_get</a></span><span class="op">(</span><span class="va">filter_path</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span>      <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">metadata</span><span class="op">[[</span><span class="st">"sheets"</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">name</span><span class="op">)</span></span>
+<span>    <span class="op">}</span>,</span>
+<span>    error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">e</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">""</span><span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="op">}</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p>By using this structure when defining a function, the app will autogenerate a file <code>get_sheetnames.Rd</code> with the description above of the function. This is useful for keeping a clean documentation.</p>
+</div>
+<div id="rsconnect" class="section level3" number="2.2.6">
+<h3>
+<span class="header-section-number">2.2.6</span> <code>rsconnect/</code><a class="anchor" aria-label="anchor" href="#rsconnect"><i class="fas fa-link"></i></a>
+</h3>
+<p>This folder contains the configurations to connect to <code>shinyapps.io</code>, which are needed to deploy the app.</p>
+</div>
+<div id="tests" class="section level3" number="2.2.7">
+<h3>
+<span class="header-section-number">2.2.7</span> <code>tests/</code><a class="anchor" aria-label="anchor" href="#tests"><i class="fas fa-link"></i></a>
+</h3>
+<p>This folder contains the <code>.R</code> scripts that run the tests for the app. We are not currently implementing tests in Teachvatory</p>
+<hr>
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="installation.html"><span class="header-section-number">1</span> Installation</a></div>
+<div class="next"><a href="edit-app.html"><span class="header-section-number">3</span> Edit the app</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#app-structure"><span class="header-section-number">2</span> App Structure</a></li>
+<li><a class="nav-link" href="#read-the-required-documentation"><span class="header-section-number">2.1</span> Read the required documentation</a></li>
+<li>
+<a class="nav-link" href="#teachvatory-code-structure"><span class="header-section-number">2.2</span> Teachvatory code structure</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#section"><span class="header-section-number">2.2.1</span> ./</a></li>
+<li><a class="nav-link" href="#r"><span class="header-section-number">2.2.2</span> .R/</a></li>
+<li><a class="nav-link" href="#dev"><span class="header-section-number">2.2.3</span> dev/</a></li>
+<li><a class="nav-link" href="#inst"><span class="header-section-number">2.2.4</span> inst/</a></li>
+<li><a class="nav-link" href="#man"><span class="header-section-number">2.2.5</span> man/</a></li>
+<li><a class="nav-link" href="#rsconnect"><span class="header-section-number">2.2.6</span> rsconnect/</a></li>
+<li><a class="nav-link" href="#tests"><span class="header-section-number">2.2.7</span> tests/</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+<li><a id="book-source" href="https://github.com/rstudio/bookdown-demo/blob/master/02-app-structure.Rmd">View source <i class="fab fa-github"></i></a></li>
+          <li><a id="book-edit" href="https://github.com/rstudio/bookdown-demo/edit/master/02-app-structure.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Teachvatory</strong>" was written by Gonzalo Jara. It was last built on 2023-02-23.</p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
+</body>
+</html>
